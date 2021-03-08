@@ -25,4 +25,9 @@ public class ProductRepository {
     public Product getById(long id){
       return products.stream().filter(product -> product.getId() == id).findAny().orElse(null);
     }
+
+    public void addProduct(Product product) {
+        product.setId(++autoCount);
+        products.add(product);
+    }
 }
