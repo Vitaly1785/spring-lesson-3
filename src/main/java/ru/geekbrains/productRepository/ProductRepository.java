@@ -30,4 +30,14 @@ public class ProductRepository {
         product.setId(++autoCount);
         products.add(product);
     }
+
+    public void update(long id, Product product) {
+        Product productToBeUpdated = getById(id);
+        productToBeUpdated.setTitle(product.getTitle());
+        productToBeUpdated.setCost(product.getCost());
+    }
+
+    public void delete(long id) {
+        products.removeIf(product -> product.getId() == id);
+    }
 }

@@ -38,5 +38,20 @@ public class ProductsController {
         repository.addProduct(product);
         return "redirect:/products";
     }
+    @GetMapping("/{id}/edit")
+    public String editProduct(Model model, @PathVariable("id") long id){
+        model.addAttribute("product", repository.getById(id));
+        return "products/edit";
+    }
+    @PatchMapping("/{id}")
+    public String updateProduct(@ModelAttribute("product") Product product, @PathVariable("id") long id){
+        repository.update(id, product);
+        return "redirect:/products";
+    }
+    @DeleteMapping("/{id}")
+    public String deleteProduct(@PathVariable("id") long id){
+        repository.delete(id);
+        return "redirect:/products";
+    }
 }
 

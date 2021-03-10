@@ -9,6 +9,9 @@
 <div th:each="product : ${products}">
     <a th:href="@{/products/{id}(id=${product.getId()})}" th:text="${product.getTitle()}">product</a>
 </div>
+<br/>
+<hr/>
+<a th:href="@{/products/new}">Add new Product</a>
 
 </body>
 </html>
