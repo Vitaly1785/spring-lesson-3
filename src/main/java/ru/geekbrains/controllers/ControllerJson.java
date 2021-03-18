@@ -6,17 +6,15 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.geekbrains.product.Product;
 
 
-
 @RestController
-
-public class HelloController3 {
-    @GetMapping(value = "xml/get")
-    public Product getXml() {
+public class ControllerJson {
+    @GetMapping(value = "/json/get", produces = "application/json")
+    public Product getJson() {
         Product product = new Product();
-        product.setId(2);
-        product.setTitle("HandsFree");
+        product.setId(1);
+        product.setTitle("Phone");
         product.setCost(200.0);
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.convertValue(product, Product.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.convertValue(product, Product.class);
     }
 }

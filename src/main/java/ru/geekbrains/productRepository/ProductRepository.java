@@ -1,0 +1,43 @@
+package ru.geekbrains.productRepository;
+
+import org.springframework.stereotype.Component;
+import ru.geekbrains.product.Product;
+
+import java.util.ArrayList;
+import java.util.List;
+@Component
+public class ProductRepository {
+    private static long autoCount;
+    private List<Product> products;
+
+    {
+        products = new ArrayList<>();
+        products.add(new Product(++autoCount, "Phone", 200));
+        products.add(new Product(++autoCount, "HandsFree", 100));
+        products.add(new Product(++autoCount, "Battery", 120));
+        products.add(new Product(++autoCount, "Charger", 50));
+        products.add(new Product(++autoCount, "Phone glass", 70));
+    }
+    public List<Product> showAll(){
+        return  products;
+    }
+    
+    public Product getById(long id){
+      return products.stream().filter(product -> product.getId() == id).findAny().orElse(null);
+    }
+
+    public void addProduct(Product product) {
+        product.setId(++autoCount);
+        products.add(product);
+    }
+
+    public void update(long id, Product product) {
+        Product productToBeUpdated = getById(id);
+        productToBeUpdated.setTitle(product.getTitle());
+        productToBeUpdated.setCost(product.getCost());
+    }
+
+    public void delete(long id) {
+        products.removeIf(product -> product.getId() == id);
+    }
+}
